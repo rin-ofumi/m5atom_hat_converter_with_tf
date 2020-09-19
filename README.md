@@ -1,4 +1,4 @@
-# sd_hat
+# hat_converter_with_tf
 Arduino project / HAT Converter with TF / for M5Atom Lite/Matrix
 
 <br>

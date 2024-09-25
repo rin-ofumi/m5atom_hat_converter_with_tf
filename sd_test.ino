@@ -1,21 +1,23 @@
-// M5Atom Lite/Matrix/ATOMS3/ATOMS3 Lite用
+// M5Atom Lite/Matrix/ATOMS3/ATOMS3 Lite/ATOMS3R用
 // 「HAT Converter with TF」のサンプルプログラム
-// @rin_ofumi 2023.12.20
+// @rin_ofumi 2024.9.25
 //
 // 確認した機種
-// - M5Atom Lite
-// - M5Atom Matrix
-// - M5ATOMS3
-// - M5ATOMS3 Lite
+// - M5Atom Lite    未確認
+// - M5Atom Matrix  未確認
+// - M5ATOMS3       OK
+// - M5ATOMS3 Lite  未確認
+// - M5ATOMS3R      OK
+// - M5ATOMS3R CAM  未確認
 //
 // 開発環境
-// - Arduino IDE ver2.2.1
+// - Arduino IDE ver2.3.2
 //
 // ボードマネージャバージョン
-// - M5Stack 2.0.9
+// - M5Stack 2.1.2
 //
 // 使用ライブラリバージョン
-// - M5Unified 0.1.11
+// - M5Unified 0.1.17
 
 #include <SD.h>
 #include <M5Unified.h>
@@ -28,6 +30,7 @@ void setup() {
   //機種判定（ATOM系とATOMS3系の区別）
   const char* name;
   switch (M5.getBoard()) {
+    case m5::board_t::board_M5AtomS3R:      name = "ATOMS3R";     break;
     case m5::board_t::board_M5AtomS3Lite:   name = "ATOMS3Lite";  break;
     case m5::board_t::board_M5AtomS3:       name = "ATOMS3";      break;
     case m5::board_t::board_M5Atom:         name = "ATOM";        break;
@@ -39,7 +42,7 @@ void setup() {
   M5.Lcd.setRotation(1);
 
   //機種判定に応じ、ピン割り当てを変更
-  if (name == "ATOMS3" or name == "ATOMS3Lite") {
+  if (name == "ATOMS3" or name == "ATOMS3Lite" or name == "ATOMS3R") {
     //ATOMS3系 SDカード用SPIポート初期化（SCK:G7, MISO:G8, MOSI:G6, SS:物理ピン無し"-1"）
     SPI_EXT.begin(7, 8, 6, -1);
   } else if (name == "ATOM") {
